@@ -3,7 +3,6 @@ import (
 	"net/http"
 	"io"
 	"log"
-//	"testxorm/controllers"
 )
 func WriteIo(path string,f interface{}){
 	http.HandleFunc(path,func (w http.ResponseWriter, r *http.Request){
@@ -17,8 +16,3 @@ func Run(){
 		log.Println(err)
 	}
 }
-//func WriteIoBySelect(path string){
-//	http.HandleFunc(path,func (w http.ResponseWriter, r *http.Request){
-//			io.WriteString(w, controllers.GetJson())
-//		})
-//}

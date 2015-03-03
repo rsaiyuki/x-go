@@ -5,20 +5,13 @@ import (
 	"testxorm/model"
 	"encoding/json"
 	"net/http"
+	"github.com/go-xorm/xorm"
 )
-
+var engine *xorm.Engine
+func InitDBEngine(){
+	engine=GetEngine()
+}
 func GetJson(r *http.Request) string {
-	engine := GetEngine()
-	//	err1 := engine.CreateTables(model.Book{})
-	//	if err1 != nil {
-	//		log.Println(err1)
-	//	}
-	//	var book1 model.Book
-	//	book1.Name="book1"
-	//	_,err2:=engine.Insert(book1,book1)
-	//	if err2!=nil {
-	//		log.Println(err2)
-	//	}
 	books := make([]model.Book, 0, 20)
 	r.ParseForm()
 	if r.Method=="GET" {
@@ -42,10 +35,8 @@ func InsertBook1(r *http.Request)string  {
 		mr.IsSuccess = false
 		mr.Msg = "书名不能为空"
 		b, _ := json.Marshal(&mr)
-//		io.WriteString(w, string(b))
 		return string(b)
 	}
-	engine := GetEngine()
 	count, err2 := engine.Insert(book, book)
 	if err2 != nil {
 		log.Println(err2)
@@ -60,12 +51,10 @@ func InsertBook1(r *http.Request)string  {
 
 	b, _ := json.Marshal(&mr)
 	log.Println(string(b))
-//	io.WriteString(w, string(b))
 	return string(b)
 }
 func InsertBook(book *model.Book) string {
 	r := new(model.Response)
-	engine := GetEngine()
 	count, err2 := engine.Insert(book, book)
 	if err2 != nil {
 		log.Println(err2)
