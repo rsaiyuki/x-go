@@ -8,7 +8,7 @@ import (
 const (
 	DB_HOST = "127.0.0.1:3306"
 	DB_USER = "root"
-	DB_PWD  = "chendong"
+	DB_PWD = "test"
 	DB_NAME = "test"
 )
 func GetEngine ()(*xorm.Engine){
